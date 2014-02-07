@@ -117,7 +117,7 @@ function draw(gl, n, currentAngle, modelMatrix, u_ModelMatrix) {
     //Draw tree trunk-------------------------------//
     //Translate first half to bottom of canvas
         modelMatrix.setTranslate(0.0, 0.0, 0.0, 0.0);
-        modelMatrix.translate(0.12, -1.00, 0.0);
+        modelMatrix.translate(0.10, -1.00, 0.0);
         modelMatrix.scale(1.5, 1.0, 1.0);
     //Pass current matrix to vertex shaders:
         gl.uniformMatrix4fv(u_ModelMatrix, false, modelMatrix.elements);
@@ -133,36 +133,14 @@ function draw(gl, n, currentAngle, modelMatrix, u_ModelMatrix) {
         gl.drawArrays(gl.TRIANGLES, 0, n);  //n is number of points, 0 is the position
 
     //Draw Tier 1 branches-------------------------//
-   /* //Translate center branch
-        modelMatrix.setTranslate(0.0, 0.0, 0.0, 0.0);
-        modelMatrix.translate(-0.075, 0.0, 0.0);
-    //Scale to half size
-        modelMatrix.scale(0.5, 1.0, 1.0);
-    //Pass current matrix to vertex shaders:
-        gl.uniformMatrix4fv(u_ModelMatrix, false, modelMatrix.elements);
-    //Draw the rectangle in the VBO
-        gl.drawArrays(gl.TRIANGLES, 0, n);  //n is number of points, 0 is the position 
-
-    //Rotate for right
-        modelMatrix.rotate(180, 0, 1, 0);
-    //Pass current matrix to vertex shaders:
-        gl.uniformMatrix4fv(u_ModelMatrix, false, modelMatrix.elements);
-    //Draw the rectangle in the VBO
-        gl.drawArrays(gl.TRIANGLES, 0, n);  //n is number of points, 0 is the position 
-*/
     //For loop to draw concurrent branches
-        for (var i = -90; i <= 90; i += 45) {
+        for (var i = -90; i <= 90; i += 30) {
            modelMatrix.setRotate(0, 0, 0, 1);
            modelMatrix.rotate(i, 0, 0, 1);
-           modelMatrix.scale(0.5, 1.0, 1.0);
+           modelMatrix.scale(0.4, 1.0, 1.0);
             //Pass current matrix to vertex shaders:
            gl.uniformMatrix4fv(u_ModelMatrix, false, modelMatrix.elements);
             //Draw the rectangle in the VBO
-           gl.drawArrays(gl.TRIANGLES, 0, n);  //n is number of points, 0 is the position 
-           modelMatrix.rotate(i + 180, 0, 1, 0);
-           //Pass current matrix to vertex shaders:
-           gl.uniformMatrix4fv(u_ModelMatrix, false, modelMatrix.elements);
-           //Draw the rectangle in the VBO
            gl.drawArrays(gl.TRIANGLES, 0, n);  //n is number of points, 0 is the position 
        }
 
