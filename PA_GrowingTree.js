@@ -183,4 +183,22 @@ function animate(angle) {
     return newAngle %= 360;
 }
 
+function strongerWind() {
+   if (ANGLE_STEP > -1) {
+        ANGLE_STEP += 0;
+    }
+   if (ANGLE_STEP <=-1) {
+        ANGLE_STEP -= 15;
+   }
+}
+
+function weakerWind() {
+    if (ANGLE_STEP > -1) {
+        ANGLE_STEP = -15;
+    }
+    if (ANGLE_STEP < -15) {
+        ANGLE_STEP += 15;
+    }
+}
+
 

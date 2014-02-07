@@ -7,10 +7,11 @@
 </head>
 
 <body onload="main()">
-    <canvas id="webgl" width="1000" height="1000">
+    <canvas id="webgl" width="800" height="800">
     </canvas>
      <p>
-         <!--button code here-->
+         <button type="button" onclick="strongerWind()"> Increase Wind</button>
+         <button type="button" onclick="weakerWind()">Decrease Wind</button>
      </p>
     <script src="./lib/webgl-utils.js"></script>
     <script src="./lib/webgl-debug.js"></script>
