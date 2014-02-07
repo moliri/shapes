@@ -16,7 +16,7 @@ var FSHADER_SOURCE =
     '}\n';
 
 //Rotation angle rate (degrees/second)
-var ANGLE_STEP = 45.0;
+var ANGLE_STEP = 30.0;
 
 function main() {
     // Retrieve <canvas> element
@@ -146,8 +146,6 @@ function draw(gl, n, currentAngle, modelMatrix, u_ModelMatrix) {
         //Draw Tier 2 branches-------------------------//
            modelMatrix.scale(0.7, 0.4, 1.0);
            
-
-
            for (var j = 0; j <= 1; j++) {
                modelMatrix.rotate(20, 0, 0, 1);
                modelMatrix.translate(j, j, 0.0);
@@ -156,27 +154,30 @@ function draw(gl, n, currentAngle, modelMatrix, u_ModelMatrix) {
            gl.uniformMatrix4fv(u_ModelMatrix, false, modelMatrix.elements);
             //Draw the rectangle in the VBO
            gl.drawArrays(gl.TRIANGLES, 0, n);
-           modelMatrix.rotate(270, 0, 0, 1);
+            //Rotate for right side branches
+           modelMatrix.rotate(currentAngle, 0, 0, 1);
             //Pass current matrix to vertex shaders:
            gl.uniformMatrix4fv(u_ModelMatrix, false, modelMatrix.elements);
             //Draw the rectangle in the VBO
            gl.drawArrays(gl.TRIANGLES, 0, n);
         }
+        pushMatrix(modelMatrix);
+
     
 
 }
-
+var g_last = Date.now();
 function animate(angle) {
     //Calculate elapsed time
-    var g_last = Date.now();
+    
     var now = Date.now();
     var elapsed = now - g_last;
     g_last = now;
 
     //Update current rotation angle (adjusted by elapsed time)
     //Limit angle to move smoothly between 60 and 120 degrees
-    if (angle > 120.0 && ANGLE_STEP > 0) ANGLE_STEP = -ANGLE_STEP;
-    if (angle < 60.0 && ANGLE_STEP < 0) ANGLE_STEP = -ANGLE_STEP;
+    if (angle > 300 && ANGLE_STEP > 0) ANGLE_STEP = -ANGLE_STEP;
+    if (angle < 270 && ANGLE_STEP < 0) ANGLE_STEP = -ANGLE_STEP;
 
     var newAngle = angle + (ANGLE_STEP * elapsed) / 1000.0;
     return newAngle %= 360;
