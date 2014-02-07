@@ -134,9 +134,9 @@ function draw(gl, n, currentAngle, modelMatrix, u_ModelMatrix) {
 
     //Draw Tier 1 branches-------------------------//
     //For loop to draw concurrent branches
-        for (var i = -90; i <= 90; i += 30) {
+        for (var i = -45; i <= 210; i += 30) {
            modelMatrix.setRotate(0, 0, 0, 1);
-           modelMatrix.rotate(i, 0, 0, 1);
+           modelMatrix.rotate(((currentAngle+i)%360), 0, 0, 1);
            modelMatrix.scale(0.4, 1.0, 1.0);
             //Pass current matrix to vertex shaders:
            gl.uniformMatrix4fv(u_ModelMatrix, false, modelMatrix.elements);
