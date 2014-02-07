@@ -141,8 +141,28 @@ function draw(gl, n, currentAngle, modelMatrix, u_ModelMatrix) {
             //Pass current matrix to vertex shaders:
            gl.uniformMatrix4fv(u_ModelMatrix, false, modelMatrix.elements);
             //Draw the rectangle in the VBO
-           gl.drawArrays(gl.TRIANGLES, 0, n);  //n is number of points, 0 is the position 
-       }
+           gl.drawArrays(gl.TRIANGLES, 0, n);  //n is number of points, 0 is the position      
+
+        //Draw Tier 2 branches-------------------------//
+           modelMatrix.scale(0.7, 0.4, 1.0);
+           
+
+
+           for (var j = 0; j <= 1; j++) {
+               modelMatrix.rotate(20, 0, 0, 1);
+               modelMatrix.translate(j, j, 0.0);
+           }
+            //Pass current matrix to vertex shaders:
+           gl.uniformMatrix4fv(u_ModelMatrix, false, modelMatrix.elements);
+            //Draw the rectangle in the VBO
+           gl.drawArrays(gl.TRIANGLES, 0, n);
+           modelMatrix.rotate(270, 0, 0, 1);
+            //Pass current matrix to vertex shaders:
+           gl.uniformMatrix4fv(u_ModelMatrix, false, modelMatrix.elements);
+            //Draw the rectangle in the VBO
+           gl.drawArrays(gl.TRIANGLES, 0, n);
+        }
+    
 
 }
 
